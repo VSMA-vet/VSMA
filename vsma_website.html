@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VSMA – Vet Santa Maria | O Veterinário para Todas as Famílias</title>
+  <meta name="description" content="Cuidamos de todos os animais como se fizessem parte da nossa família. Clínica veterinária no Barreiro com serviços de consultas, cirurgias, Pet Spa e Pet Shop.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:    #1E4035;
+      --sage:      #3D7A60;
+      --mint:      #7EC4A5;
+      --cream:     #F5F0E8;
+      --sand:      #EDE5D4;
+      --charcoal:  #1C1C1C;
+      --stone:     #6B6355;
+      --white:     #FFFFFF;
+      --accent:    #C8A96E;
+      --accent-lt: #E8D9B8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 72px;
+      background: rgba(30, 64, 53, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(126,196,165,0.15);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 14px; text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 42px; height: 42px;
+      background: var(--mint);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--forest);
+    }
+    .nav-logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 600; color: var(--white);
+      letter-spacing: 0.03em; line-height: 1.1;
+    }
+    .nav-logo-text span { font-size: 0.7rem; font-weight: 300; display: block; color: var(--mint); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: rgba(255,255,255,0.75);
+      font-size: 0.82rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color .2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      background: var(--mint); transform: scaleX(0); transition: transform .25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--mint); color: var(--forest) !important;
+      padding: 8px 22px; border-radius: 24px;
+      font-weight: 500 !important;
+      transition: background .2s, transform .15s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); }
+
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all .3s; }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(160deg, rgba(30,64,53,0.88) 0%, rgba(30,64,53,0.6) 55%, rgba(30,64,53,0.3) 100%),
+        url('https://0501.nccdn.net/4_2/000/000/048/0a6/157927123_4058619430828854_4979938046453423077_n.jpg') center/cover no-repeat;
+      display: flex; align-items: center;
+      padding: 0 5vw; padding-top: 72px;
+      position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(to top, var(--cream), transparent);
+    }
+
+    .hero-inner { max-width: 680px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(126,196,165,0.2); border: 1px solid rgba(126,196,165,0.4);
+      padding: 6px 16px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+    .hero-badge span { font-size: 0.75rem; color: var(--mint); letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+    .hero-title em { font-style: italic; color: var(--mint); }
+
+    .hero-sub {
+      font-size: 1.05rem; line-height: 1.7;
+      color: rgba(255,255,255,0.8);
+      max-width: 500px; margin-bottom: 48px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--mint); color: var(--forest);
+      padding: 14px 36px; border-radius: 32px;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; transition: all .25s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(200,169,110,0.4); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      padding: 14px 36px; border-radius: 32px; border: 1px solid rgba(255,255,255,0.4);
+      font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; transition: all .25s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    .hero-scroll {
+      position: absolute; bottom: 140px; right: 5vw;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: .6;
+    }
+    .hero-scroll span { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); writing-mode: vertical-rl; }
+    .hero-scroll-line { width: 1px; height: 60px; background: var(--mint); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:.6} 50%{transform:scaleY(.5);opacity:.2} }
+
+    /* ── STATS BAR ──────────────────────────────────────── */
+    .stats-bar {
+      background: var(--forest);
+      display: flex; justify-content: center; gap: 0;
+    }
+    .stat-item {
+      flex: 1; max-width: 260px;
+      padding: 36px 28px; text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; color: var(--mint);
+      line-height: 1; margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── SECTION COMMONS ────────────────────────────────── */
+    section { padding: 100px 5vw; }
+    .section-tag {
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage); font-weight: 500; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-tag::before { content: ''; width: 28px; height: 1px; background: var(--sage); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300; line-height: 1.15; color: var(--forest);
+      margin-bottom: 24px;
+    }
+    .section-title em { font-style: italic; }
+    .section-body { font-size: 1rem; line-height: 1.8; color: var(--stone); max-width: 540px; }
+
+    /* ── SERVICES ───────────────────────────────────────── */
+    #services { background: var(--sand); }
+    .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 72px; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card {
+      background: var(--white);
+      padding: 48px 36px; position: relative; overflow: hidden;
+      cursor: pointer; transition: all .3s;
+      group: true;
+    }
+    .service-card:hover { background: var(--forest); }
+    .service-card:hover .sc-icon { background: rgba(126,196,165,0.2); }
+    .service-card:hover .sc-icon svg { stroke: var(--mint); }
+    .service-card:hover .sc-title { color: var(--white); }
+    .service-card:hover .sc-body { color: rgba(255,255,255,0.65); }
+    .service-card:hover .sc-arrow { color: var(--mint); transform: translate(4px,-4px); }
+
+    .sc-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(61,122,96,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 28px; transition: all .3s;
+    }
+    .sc-icon svg { width: 24px; height: 24px; stroke: var(--sage); stroke-width: 1.5; fill: none; transition: stroke .3s; }
+    .sc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; color: var(--forest); margin-bottom: 14px; transition: color .3s; line-height: 1.2; }
+    .sc-body { font-size: 0.9rem; line-height: 1.7; color: var(--stone); margin-bottom: 28px; transition: color .3s; }
+    .sc-arrow { font-size: 1.2rem; color: var(--sage); transition: all .3s; display: inline-block; }
+
+    /* ── ABOUT ──────────────────────────────────────────── */
+    #about { background: var(--cream); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-image-wrap { position: relative; }
+    .about-image {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border-radius: 4px;
+    }
+    .about-image-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--sage), var(--forest));
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-image-placeholder svg { width: 80px; height: 80px; stroke: rgba(255,255,255,0.3); fill: none; }
+    .about-badge-float {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--accent); border-radius: 4px;
+      padding: 28px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+    .about-badge-float .num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--white); line-height: 1; }
+    .about-badge-float .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.8); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+    .about-list { margin-top: 36px; display: flex; flex-direction: column; gap: 18px; }
+    .about-item { display: flex; align-items: flex-start; gap: 16px; }
+    .about-item-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); margin-top: 7px; flex-shrink: 0; }
+    .about-item-text { font-size: 0.95rem; line-height: 1.65; color: var(--stone); }
+    .about-item-text strong { color: var(--forest); font-weight: 500; }
+
+    /* ── EDUCATION ──────────────────────────────────────── */
+    #education { background: var(--forest); }
+    #education .section-tag { color: var(--mint); }
+    #education .section-tag::before { background: var(--mint); }
+    #education .section-title { color: var(--white); }
+    #education .section-body { color: rgba(255,255,255,0.65); }
+
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 64px; }
+    .edu-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(126,196,165,0.15);
+      border-radius: 4px; padding: 44px 40px;
+      transition: all .3s; cursor: pointer;
+    }
+    .edu-card:hover { background: rgba(126,196,165,0.1); border-color: rgba(126,196,165,0.4); }
+    .edu-card-tag { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mint); margin-bottom: 16px; }
+    .edu-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
+    .edu-card-body { font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+    .edu-card-link { color: var(--mint); font-size: 0.85rem; text-decoration: none; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 8px; transition: gap .2s; }
+    .edu-card-link:hover { gap: 14px; }
+
+    /* ── CONTACT ────────────────────────────────────────── */
+    #contact { background: var(--sand); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+    .contact-info { display: flex; flex-direction: column; gap: 32px; margin-top: 40px; }
+    .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+    .contact-item-icon {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--white); border: 1px solid rgba(61,122,96,0.15);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-item-icon svg { width: 18px; height: 18px; stroke: var(--sage); fill: none; stroke-width: 1.5; }
+    .contact-item-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone); margin-bottom: 5px; }
+    .contact-item-value { font-size: 1rem; color: var(--forest); font-weight: 400; line-height: 1.5; }
+
+    .contact-form { background: var(--white); padding: 52px 48px; border-radius: 4px; }
+    .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--forest); margin-bottom: 32px; }
+    .form-group { margin-bottom: 22px; }
+    .form-group label { display: block; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 8px; }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1px solid #DDD; border-radius: 4px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--charcoal);
+      background: var(--cream); outline: none;
+      transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--sage); background: var(--white); }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-submit {
+      width: 100%; padding: 15px;
+      background: var(--forest); color: var(--white);
+      border: none; border-radius: 32px; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: all .25s;
+    }
+    .form-submit:hover { background: var(--sage); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(30,64,53,0.25); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #111;
+      padding: 64px 5vw 40px;
+    }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; color: var(--white); font-weight: 300; margin-bottom: 16px;
+    }
+    .footer-brand .brand-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 320px; }
+    .footer-col h4 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mint); margin-bottom: 20px; }
+    .footer-col a { display: block; font-size: 0.9rem; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 12px; transition: color .2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.3); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; transition: all .2s;
+    }
+    .footer-social a:hover { border-color: var(--mint); background: rgba(126,196,165,0.1); }
+    .footer-social svg { width: 15px; height: 15px; stroke: rgba(255,255,255,0.5); fill: none; stroke-width: 1.5; }
+    .footer-social a:hover svg { stroke: var(--mint); }
+
+    /* ── ANNOUNCEMENT BANNER ─────────────────────────────── */
+    .announcement {
+      background: var(--accent);
+      padding: 14px 5vw;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      text-align: center; flex-wrap: wrap;
+    }
+    .announcement p { font-size: 0.88rem; color: var(--forest); line-height: 1.5; }
+    .announcement strong { font-weight: 500; }
+    .ann-close { background: none; border: none; cursor: pointer; color: var(--forest); opacity: .6; font-size: 1.1rem; flex-shrink: 0; }
+
+    /* ── HOURS ───────────────────────────────────────────── */
+    .hours-grid { display: flex; gap: 2px; margin-top: 28px; }
+    .hour-item { background: rgba(255,255,255,0.06); padding: 16px 20px; border-radius: 2px; flex: 1; text-align: center; }
+    .hour-day { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 6px; }
+    .hour-time { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--white); }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; align-items: flex-start;
+        position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--forest); padding: 28px 5vw;
+        gap: 22px; border-top: 1px solid rgba(126,196,165,0.15);
+      }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .services-header { grid-template-columns: 1fr; gap: 24px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-badge-float { right: 16px; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-form { padding: 36px 28px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1/-1; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .hours-grid { flex-wrap: wrap; }
+      .hour-item { min-width: calc(50% - 1px); }
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+    .fade-up:nth-child(5) { transition-delay: .4s; }
+    .fade-up:nth-child(6) { transition-delay: .5s; }
+
+    /* ── MAP PLACEHOLDER ────────────────────────────────── */
+    .map-placeholder {
+      width: 100%; height: 300px;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%);
+      border-radius: 4px; margin-top: 40px;
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .map-placeholder svg { width: 32px; height: 32px; stroke: rgba(255,255,255,0.5); fill: none; }
+    .map-placeholder p { font-size: 0.9rem; color: rgba(255,255,255,0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement" id="ann">
+  <p>🎄 <strong>Recolha de bens para animais em abrigos</strong> — Traga mantas, camas, brinquedos ou areias na sua próxima visita. Obrigado!</p>
+  <button class="ann-close" onclick="document.getElementById('ann').remove()">✕</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">V</div>
+    <div class="nav-logo-text">VSMA <span>Vet Santa Maria</span></div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Serviços</a></li>
+    <li><a href="#about">Sobre Nós</a></li>
+    <li><a href="#education">Formação</a></li>
+    <li><a href="#contact" class="nav-cta">Contactar</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="dot"></div>
+      <span>Barreiro · Setúbal · Clínica Veterinária</span>
+    </div>
+    <h1 class="hero-title">O Veterinário<br>para <em>Todas</em> as<br>Famílias</h1>
+    <p class="hero-sub">Cuidamos dos seus animais com o mesmo carinho com que cuidaríamos da nossa própria família — com conhecimento actualizado e uma clínica totalmente equipada.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Marcar Consulta</a>
+      <a href="#services" class="btn-outline">Os Nossos Serviços</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item fade-up">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Anos de experiência</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Serviços especializados</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">6/7</div>
+    <div class="stat-label">Dias por semana</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Dedicação aos animais</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-tag">O que oferecemos</div>
+      <h2 class="section-title">Serviços pensados<br>para o seu <em>animal</em></h2>
+    </div>
+    <p class="section-body">Desde consultas de rotina a cirurgias especializadas, passando por cuidados estéticos e de bem-estar — temos tudo o que o seu companheiro precisa.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3 class="sc-title">Consultas</h3>
+      <p class="sc-body">Consultas de medicina preventiva, diagnóstico e acompanhamento clínico. Cuidados de rotina e exames completos.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+      </div>
+      <h3 class="sc-title">Consultas de Especialidade</h3>
+      <p class="sc-body">Dermatologia, ortopedia, cardiologia e outras especialidades com equipamento de diagnóstico avançado.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5"/></svg>
+      </div>
+      <h3 class="sc-title">Cirurgias</h3>
+      <p class="sc-body">Bloco cirúrgico completamente equipado para cirurgias de tecidos moles, ortopédicas e procedimentos dentários.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+      </div>
+      <h3 class="sc-title">Pet Spa</h3>
+      <p class="sc-body">Banho, tosa e tratamentos estéticos realizados por profissionais experientes, com produtos de alta qualidade.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <h3 class="sc-title">Pet Shop</h3>
+      <p class="sc-body">Alimentação premium, acessórios, medicamentos e produtos de higiene seleccionados pelos nossos veterinários.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+    <div class="service-card fade-up">
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <h3 class="sc-title">Animais Sénior</h3>
+      <p class="sc-body">Programas especializados de acompanhamento para animais sénior, com exames preventivos e cuidados adaptados.</p>
+      <span class="sc-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-image-wrap fade-up">
+      <div class="about-image-placeholder">
+        <svg viewBox="0 0 24 24" style="width:96px;height:96px;stroke:rgba(255,255,255,0.25);fill:none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="about-badge-float">
+        <div class="num">2014</div>
+        <div class="lbl">Fundada em</div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="section-tag">Quem somos</div>
+      <h2 class="section-title">Carinho e Dinamismo<br>aliados ao <em>Conhecimento</em></h2>
+      <p class="section-body">Cuidamos de todos os animais como se fizessem parte da nossa família. Com conhecimento actualizado e uma clínica totalmente equipada, podemos fazer o que mais gostamos: ajudar os animais.</p>
+      <div class="about-list">
+        <div class="about-item">
+          <div class="about-item-dot"></div>
+          <p class="about-item-text"><strong>Equipa multidisciplinar</strong> com veterinários especializados em diversas áreas da medicina animal.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-item-dot"></div>
+          <p class="about-item-text"><strong>Equipamento de diagnóstico avançado</strong> — radiologia digital, ecografia e análises clínicas in-house.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-item-dot"></div>
+          <p class="about-item-text"><strong>Formação contínua</strong> para garantir os mais altos padrões de medicina veterinária.</p>
+        </div>
+        <div class="about-item">
+          <div class="about-item-dot"></div>
+          <p class="about-item-text"><strong>Atendimento personalizado</strong>, porque cada animal é único e merece cuidados à medida.</p>
+        </div>
+      </div>
+      <br><br>
+      <a href="#contact" class="btn-primary">Conheça a Nossa Equipa</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div style="max-width: 580px">
+    <div class="section-tag">Formação</div>
+    <h2 class="section-title" style="color:var(--white)">Uma Oferta Formativa<br>de <em>Excelência</em></h2>
+    <p class="section-body">Queremos que os tutores de animais tenham o conhecimento necessário para ajudar os seus companheiros. Oferecemos formação de elevada qualidade, abordando todos os aspectos da saúde animal.</p>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card fade-up">
+      <div class="edu-card-tag">Formação presencial</div>
+      <h3 class="edu-card-title">Cursos de Saúde e Bem-Estar Animal</h3>
+      <p class="edu-card-body">Aprenda a identificar sinais de doença, prestar primeiros socorros e garantir a melhor qualidade de vida ao seu animal. Cursos para tutores de todos os níveis.</p>
+      <a href="#contact" class="edu-card-link">Saber mais →</a>
+    </div>
+    <div class="edu-card fade-up">
+      <div class="edu-card-tag">Online · Ao vivo</div>
+      <h3 class="edu-card-title">Webinares com Especialistas</h3>
+      <p class="edu-card-body">Sessões online com veterinários especialistas sobre nutrição, comportamento, doenças sazonais e muito mais. Acesso a partir de qualquer lugar.</p>
+      <a href="#contact" class="edu-card-link">Ver calendário →</a>
+    </div>
+  </div>
+
+  <div class="hours-grid" style="margin-top: 64px;">
+    <div class="hour-item"><div class="hour-day">Seg – Sex</div><div class="hour-time">10h30 – 13h &nbsp;|&nbsp; 14h – 19h30</div></div>
+    <div class="hour-item"><div class="hour-day">Sábado</div><div class="hour-time">10h00 – 15h00</div></div>
+    <div class="hour-item"><div class="hour-day">Domingo</div><div class="hour-time">Encerrado</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width: 440px; margin-bottom: 72px;">
+    <div class="section-tag">Contacto</div>
+    <h2 class="section-title">Teremos todo o gosto<br>em <em>responder</em></h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="fade-up">
+      <p class="section-body">Tem alguma questão sobre a saúde do seu animal? Quer marcar uma consulta ou saber mais sobre os nossos serviços? Fale connosco.</p>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Morada</div>
+            <div class="contact-item-value">Avenida Santa Maria 25-A<br>2830 – 007 Barreiro, Setúbal</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63 19.79 19.79 0 01.22 2 2 2 0 012.22 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.2 7.2a16 16 0 006.6 6.6l.36-.37a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Telefone</div>
+            <div class="contact-item-value">924 285 828</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">geral.vsma@gmail.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p>Avenida Santa Maria 25-A, Barreiro</p>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="contact-form">
+        <h3 class="form-title">Envie-nos uma mensagem</h3>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" placeholder="O seu nome completo" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="o.seu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Mensagem</label>
+            <textarea placeholder="Como podemos ajudar?" required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Enviar Mensagem</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name">VSMA – Vet Santa Maria</div>
+      <p class="brand-tagline">Cuidamos de todos os animais como se fizessem parte da nossa família. Clínica veterinária no Barreiro, Setúbal.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <a href="#services">Consultas</a>
+      <a href="#services">Especialidades</a>
+      <a href="#services">Cirurgias</a>
+      <a href="#services">Pet Spa</a>
+      <a href="#services">Pet Shop</a>
+    </div>
+    <div class="footer-col">
+      <h4>Clínica</h4>
+      <a href="#about">Sobre Nós</a>
+      <a href="#about">A Nossa Equipa</a>
+      <a href="#education">Formação</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2024 VSMA – Vet Santa Maria. Todos os direitos reservados.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Mensagem Enviada ✓';
+    btn.style.background = 'var(--sage)';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Enviar Mensagem';
+      btn.style.background = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Smooth active nav on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    sections.forEach(s => {
+      const top = s.offsetTop - 100;
+      const bottom = top + s.offsetHeight;
+      const link = document.querySelector(`.nav-links a[href="#${s.id}"]`);
+      if (link) {
+        if (scrollY >= top && scrollY < bottom) {
+          link.style.color = 'var(--mint)';
+        } else {
+          link.style.color = '';
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
